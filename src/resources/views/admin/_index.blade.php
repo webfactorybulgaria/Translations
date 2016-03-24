@@ -36,8 +36,16 @@
                     <td>
                         @include('core::admin._button-edit')
                     </td>
-                    <td>@{{ model.key }}</td>
-                    <td>@{{ model.translation }}</td>
+                    <td>
+                        <span>@{{model.key}}</span>
+                    </td>
+                    <td>
+                        <span edit-translation ng-init="temp = model.translation">@{{model.translation}}</span>
+                        <div class="hidden" style="position: relative;">
+                            <input key-translation class="form-control input-sm" ng-model="model.translation" placeholder="@lang('label.translation')">
+                            <span save-translation ng-click="update(model, model.translation); temp = model.translation" class="fa fa-save" title="Save" style="position: absolute;right: 8px;top: 5px;line-height: 1;font-size: 1.5em;color: #428bca;cursor: pointer;"></span>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
             <tfoot>
