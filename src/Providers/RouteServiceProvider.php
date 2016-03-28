@@ -29,8 +29,11 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
+            
             $router->get('admin/translations', ['as' => 'admin.translations.index', 'uses' => 'AdminController@index']);
             $router->get('admin/translations/create', ['as' => 'admin.translations.create', 'uses' => 'AdminController@create']);
+            $router->get('admin/translations/mass', ['as' => 'admin.translations.massEdit', 'uses' => 'AdminController@massEdit']);
+            $router->post('admin/translations/mass', ['as' => 'admin.translations.massStore', 'uses' => 'AdminController@massStore']);
             $router->get('admin/translations/{translation}/edit', ['as' => 'admin.translations.edit', 'uses' => 'AdminController@edit']);
             $router->post('admin/translations', ['as' => 'admin.translations.store', 'uses' => 'AdminController@store']);
             $router->put('admin/translations/{translation}', ['as' => 'admin.translations.update', 'uses' => 'AdminController@update']);

@@ -33,4 +33,24 @@ class CacheDecorator extends CacheAbstractDecorator implements TranslationInterf
 
         return $data;
     }
+
+    public function deleteAll($locale)
+    {   
+        return $this->repo->deleteAll($locale);
+    }
+
+    public function getItemID($key)
+    {   
+        return $this->repo->getItemID($key);
+    }
+
+    public function insertMassItems($massItems)
+    {   
+        return $this->repo->insertMassItems($massItems);
+    }
+
+    public function deleteEmptyItems()
+    {
+        return $this->repo->deleteEmptyItems();
+    }
 }

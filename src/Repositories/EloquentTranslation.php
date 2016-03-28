@@ -25,8 +25,53 @@ class EloquentTranslation extends RepositoriesAbstract implements TranslationInt
                 ->join('translation_translations', 'translations.id', '=', 'translation_translations.translation_id')
                 ->where('locale', $locale)
                 ->where('group', $group)
+                ->orderBy('key')
                 ->pluck('translation', 'key');
 
         return $array;
+    }
+
+    public function deleteAll($locale)
+    {
+        return DB::table('translation_translations')
+                 ->where('locale', $locale)
+                 ->delete();
+    }
+
+    public function getItemID($key) 
+    {
+        return DB::table('translations')
+                 ->where('key', $key)
+                 ->value('id');
+    }
+
+    public function insertMassItems($massItems) 
+    {
+        return DB::table('translation_translations')->insert($massItems);
+    }
+
+    public function deleteEmptyItems()
+    {
+        $trans_keys = DB::table('translations')
+                        ->select('id')
+                        ->pluck('id');
+        foreach ($trans_keys as $id)
+        {
+            $translations = DB::table('translation_translations')
+                            ->select('translation')
+                            ->where('translation_id', $id)
+                            ->pluck('translation');
+            $allLocalesEmpty = true;
+            foreach ($translations as $translation)
+            {
+                if (!empty(trim($translation))) 
+                    $allLocalesEmpty = false;
+                break;
+            }
+            if ($allLocalesEmpty){
+                //dd('x');
+                DB::table('translations')->where('id', $id)->delete();
+            }
+        }
     }
 }
