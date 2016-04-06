@@ -34,23 +34,34 @@ class CacheDecorator extends CacheAbstractDecorator implements TranslationInterf
         return $data;
     }
 
-    public function deleteAll($locale)
-    {   
-        return $this->repo->deleteAll($locale);
-    }
-
     public function getItemID($key)
-    {   
-        return $this->repo->getItemID($key);
-    }
-
-    public function insertMassItems($massItems)
-    {   
-        return $this->repo->insertMassItems($massItems);
-    }
-
-    public function deleteEmptyItems()
     {
-        return $this->repo->deleteEmptyItems();
+        $cacheKey = md5(config('app.locale').'TranslationId'.$key);
+
+        if ($this->cache->has($cacheKey)) {
+            return $this->cache->get($cacheKey);
+        }
+
+        $data = $this->repo->getItemID($key);
+
+        // Store in cache for next request
+        $this->cache->put($cacheKey, $data);
+
+        return $data;
+    }
+
+    public function updateItem($itemId, $locale, $updatedItem)
+    {
+        return $this->repo->updateItem($itemId, $locale, $updatedItem);
+    }
+
+    public function insertItem($val, $locale, $insertItem)
+    {
+        return $this->repo->insertItem($val, $locale, $insertItem);
+    }
+
+    public function processTranslations($request)
+    {
+        return $this->repo->processTranslations($request);
     }
 }

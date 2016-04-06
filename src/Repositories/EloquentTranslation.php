@@ -5,6 +5,8 @@ namespace TypiCMS\Modules\Translations\Repositories;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
+use TypiCMS\Modules\Translations\Models\Translation;
+use TypiCMS\Modules\Translations\Models\TranslationTranslation;
 
 class EloquentTranslation extends RepositoriesAbstract implements TranslationInterface
 {
@@ -31,47 +33,83 @@ class EloquentTranslation extends RepositoriesAbstract implements TranslationInt
         return $array;
     }
 
-    public function deleteAll($locale)
-    {
-        return DB::table('translation_translations')
-                 ->where('locale', $locale)
-                 ->delete();
-    }
-
     public function getItemID($key) 
     {
-        return DB::table('translations')
-                 ->where('key', $key)
-                 ->value('id');
+        return Translation::where('key', $key)->value('id');
     }
 
-    public function insertMassItems($massItems) 
+    public function updateItem($itemId, $locale, $updatedItem)
     {
-        return DB::table('translation_translations')->insert($massItems);
+
+        return TranslationTranslation::where('locale', $locale)
+                                     ->where('translation_id', $itemId)
+                                     ->update($updatedItem);
     }
 
-    public function deleteEmptyItems()
+    public function processTranslations($request)
     {
-        $trans_keys = DB::table('translations')
-                        ->select('id')
-                        ->pluck('id');
-        foreach ($trans_keys as $id)
-        {
-            $translations = DB::table('translation_translations')
-                            ->select('translation')
-                            ->where('translation_id', $id)
-                            ->pluck('translation');
-            $allLocalesEmpty = true;
-            foreach ($translations as $translation)
-            {
-                if (!empty(trim($translation))) 
-                    $allLocalesEmpty = false;
-                break;
-            }
-            if ($allLocalesEmpty){
-                //dd('x');
-                DB::table('translations')->where('id', $id)->delete();
+        $locale = $request->get('locale') ?: config('app.locale');
+        $existingTranslations = $this->allToArray($locale, 'db');
+
+        $lines = preg_split('/\r?\n/', $request->get('translations'));
+        $newItems = $itemKeys = [];
+
+        foreach($lines as $line) {
+            if(strlen(trim($line)) && strpos($line,'=')) {
+                $item = explode('=', $line, 2);
+                $itemKey = trim($item[0]);
+                $itemVal = trim($item[1]);
+                array_push($itemKeys, $itemKey);
+
+                if(isset($existingTranslations[$itemKey])) {
+                    if($existingTranslations[$itemKey] != $itemVal) {
+                        $this->updateItem($this->getItemID($itemKey), $locale, ['translation' => $itemVal]);
+                    }
+                }
+                else {
+                    $newItems[$itemKey] = $itemVal ?: '';
+                }
             }
         }
+
+        $this->clearTranslations($itemKeys, $existingTranslations);
+
+        $this->insertTranslations($newItems, $locale);
+    }
+
+    public function clearTranslations($itemKeys, $existingTranslations)
+    {
+        foreach ($existingTranslations as $keycode => $value) {
+            if (!in_array($keycode, $itemKeys)) {
+                Translation::where('key', $keycode)->first()->delete();
+            }
+        }
+    }
+
+    public function insertTranslations($newItems, $locale)
+    {
+        foreach ($newItems as $key => $newItem) {
+            $itemArray = [
+                'group' => 'db',
+                'key' => trim($key),
+            ];
+            $this->insertItem($newItem, $locale, $itemArray);
+        }
+    }
+
+    public function insertItem($val, $locale, $insertItem)
+    {
+        $insertId = Translation::insertGetId($insertItem);
+        $items = [];
+
+        foreach(config('translatable.locales') as $trans_locale) {
+            $item = [
+                'translation' => ($trans_locale == $locale && isset($val)) ? trim($val) : '',
+                'translation_id' => $insertId,
+                'locale' => $trans_locale
+            ];
+            array_push($items, $item);
+        }
+        TranslationTranslation::insert($items);
     }
 }
