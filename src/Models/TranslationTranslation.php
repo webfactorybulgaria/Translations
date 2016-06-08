@@ -11,6 +11,6 @@ class TranslationTranslation extends BaseTranslation
      */
     public function owner()
     {
-        return $this->belongsTo('TypiCMS\Modules\Translations\Models\Translation', 'translation_id');
+        return $this->belongsTo('TypiCMS\Modules\Translations\Models\Translation', 'translation_id')->withoutGlobalScopes();
     }
 }

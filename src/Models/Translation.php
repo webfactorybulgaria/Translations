@@ -2,9 +2,9 @@
 
 namespace TypiCMS\Modules\Translations\Models;
 
-use Dimsav\Translatable\Translatable;
 use Laracasts\Presenter\PresentableTrait;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Core\Traits\Translatable;
 use TypiCMS\Modules\History\Traits\Historable;
 
 class Translation extends Base
@@ -31,15 +31,6 @@ class Translation extends Base
         'translation',
     ];
 
-    protected $appends = ['translation'];
+    protected $appends = [];
 
-    /**
-     * Get translation attribute from translation table.
-     *
-     * @return string
-     */
-    public function getTranslationAttribute($value)
-    {
-        return $this->translation;
-    }
 }
