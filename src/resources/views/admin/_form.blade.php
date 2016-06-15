@@ -1,8 +1,3 @@
-@section('js')
-    <script src="{{ asset('js/admin/form.js') }}"></script>
-@endsection
-
-
 @include('core::admin._buttons-form')
 
 {!! BootForm::hidden('id') !!}
@@ -15,7 +10,7 @@
     <div class="form-group @if($errors->has($lang.'.translation'))has-error @endif">
         <div class="input-group">
             <span class="input-group-addon">{{ strtoupper($lang) }}</span>
-            {!! Form::text($lang . '[translation]')->addClass('form-control') !!}
+            {!! Form::text($lang.'[translation]')->addClass('form-control') !!}
         </div>
         {!! $errors->first($lang.'.translation', '<p class="help-block">:message</p>') !!}
     </div>

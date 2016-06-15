@@ -12,7 +12,7 @@
 		{{ $message or '' }}
 	</div>
 </div>
-{!! BootForm::open()->action(route('admin.translations.massStore').'?locale='.$locale)->role('form') !!}
+{!! BootForm::open()->action(route('admin::translations-massStore').'?locale='.$locale)->role('form') !!}
 <textarea style="width:100%;max-width:100%;min-height:700px;" name="translations">
 @foreach($models as $key => $trans)
 {{$key}}={{$trans}}

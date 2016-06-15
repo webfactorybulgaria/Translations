@@ -29,21 +29,22 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
+            $router->get('admin/translations', 'AdminController@index')->name('admin::index-translations');
+            $router->get('admin/translations/create', 'AdminController@create')->name('admin::create-translation');
             
-            $router->get('admin/translations', ['as' => 'admin.translations.index', 'uses' => 'AdminController@index']);
-            $router->get('admin/translations/create', ['as' => 'admin.translations.create', 'uses' => 'AdminController@create']);
-            $router->get('admin/translations/mass', ['as' => 'admin.translations.massEdit', 'uses' => 'AdminController@massEdit']);
-            $router->post('admin/translations/mass', ['as' => 'admin.translations.massStore', 'uses' => 'AdminController@massStore']);
-            $router->get('admin/translations/{translation}/edit', ['as' => 'admin.translations.edit', 'uses' => 'AdminController@edit']);
-            $router->post('admin/translations', ['as' => 'admin.translations.store', 'uses' => 'AdminController@store']);
-            $router->put('admin/translations/{translation}', ['as' => 'admin.translations.update', 'uses' => 'AdminController@update']);
+            $router->get('admin/translations/mass', 'AdminController@massEdit')->name('admin::translations-massEdit');
+            $router->post('admin/translations/mass', 'AdminController@massStore')->name('admin::translations-massStore');
+
+            $router->get('admin/translations/{translation}/edit', 'AdminController@edit')->name('admin::edit-translation');
+            $router->post('admin/translations', 'AdminController@store')->name('admin::store-translation');
+            $router->put('admin/translations/{translation}', 'AdminController@update')->name('admin::update-translation');
 
             /*
              * API routes
              */
-            $router->get('api/translations', ['as' => 'api.translations.index', 'uses' => 'ApiController@index']);
-            $router->put('api/translations/{translation}', ['as' => 'api.translations.update', 'uses' => 'ApiController@update']);
-            $router->delete('api/translations/{translation}', ['as' => 'api.translations.destroy', 'uses' => 'ApiController@destroy']);
+            $router->get('api/translations', 'ApiController@index')->name('api::index-translations');
+            $router->put('api/translations/{translation}', 'ApiController@update')->name('api::update-translation');
+            $router->delete('api/translations/{translation}', 'ApiController@destroy')->name('api::destroy-translation');
         });
     }
 }
