@@ -84,7 +84,7 @@ class AdminController extends BaseAdminController
 
         Notification::success(trans('db.mass_edit_success'));
 
-        return Input::get('exit') ? redirect()->route('admin.translations.index') : redirect()->back();
+        return Input::get('exit') ? redirect()->route('admin::index-translations') : redirect()->back();
     }
 
     /**

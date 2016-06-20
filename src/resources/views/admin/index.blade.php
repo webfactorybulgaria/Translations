@@ -61,7 +61,7 @@
                 </tr>
             </tfoot>
         </table>
-    <a href="{{ route('admin::' . $module . '-massEdit').'?locale='.$locale }}">Mass edit translations</a>
+    <a href="{{ route('admin::translations-massEdit').'?locale='.$locale }}">Mass edit translations</a>
     </div>
 
 </div>
