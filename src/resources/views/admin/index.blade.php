@@ -9,7 +9,7 @@
     @include('core::admin._button-create', ['module' => 'translations'])
 
     <h1>
-        <span>@{{ models.length }} @choice('translations::global.translations', 2)</span>
+        <span>@{{ totalModels }} @choice('translations::global.translations', 2)</span>
     </h1>
 
     <div class="btn-toolbar">
@@ -18,12 +18,15 @@
 
     <div class="table-responsive">
 
-        <table st-persist="translationsTable" st-table="displayedModels" st-safe-src="models" st-order st-filter class="table table-condensed table-main">
+        <table st-persist="translationsTable" st-table="displayedModels" st-order st-sort-default="key" st-pipe="callServer" st-filter class="table table-condensed table-main">
             <thead>
+                <tr>
+                    <td colspan="4" st-items-by-page="itemsByPage" st-pagination="" st-template="/views/partials/pagination.custom.html"></td>
+                </tr>
                 <tr>
                     <th class="delete"></th>
                     <th class="edit"></th>
-                    <th st-sort="key" st-sort-default="true" class="key st-sort">Key</th>
+                    <th st-sort="key" class="key st-sort">Key</th>
                     <th st-sort="translation" class="translation st-sort">Translation</th>
                 </tr>
                 <tr>
@@ -57,7 +60,10 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4" typi-pagination></td>
+                    <td colspan="3" st-items-by-page="itemsByPage" st-pagination="" st-template="/views/partials/pagination.custom.html"></td>
+                    <td>
+                        <div ng-include="'/views/partials/pagination.itemsPerPage.html'"></div>
+                    </td>
                 </tr>
             </tfoot>
         </table>
