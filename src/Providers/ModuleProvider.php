@@ -4,10 +4,10 @@ namespace TypiCMS\Modules\Translations\Providers;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
-use TypiCMS\Modules\Translations\Models\Translation;
-use TypiCMS\Modules\Translations\Repositories\CacheDecorator;
-use TypiCMS\Modules\Translations\Repositories\EloquentTranslation;
+use TypiCMS\Modules\Core\Custom\Services\Cache\LaravelCache;
+use TypiCMS\Modules\Translations\Custom\Models\Translation;
+use TypiCMS\Modules\Translations\Custom\Repositories\CacheDecorator;
+use TypiCMS\Modules\Translations\Custom\Repositories\EloquentTranslation;
 
 class ModuleProvider extends ServiceProvider
 {
@@ -39,14 +39,14 @@ class ModuleProvider extends ServiceProvider
         /*
          * Register route service provider
          */
-        $app->register('TypiCMS\Modules\Translations\Providers\RouteServiceProvider');
+        $app->register('TypiCMS\Modules\Translations\Custom\Providers\RouteServiceProvider');
 
         /*
          * Sidebar view composer
          */
-        $app->view->composer('core::admin._sidebar', 'TypiCMS\Modules\Translations\Composers\SidebarViewComposer');
+        $app->view->composer('core::admin._sidebar', 'TypiCMS\Modules\Translations\Custom\Composers\SidebarViewComposer');
 
-        $app->bind('TypiCMS\Modules\Translations\Repositories\TranslationInterface', function (Application $app) {
+        $app->bind('TypiCMS\Modules\Translations\Custom\Repositories\TranslationInterface', function (Application $app) {
             $repository = new EloquentTranslation(
                 new Translation()
             );
