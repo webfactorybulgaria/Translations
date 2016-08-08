@@ -1,6 +1,6 @@
 <?php
 
-namespace TypiCMS\Modules\Translations\Custom\Models;
+namespace TypiCMS\Modules\Translations\Shells\Models;
 
 use TypiCMS\Modules\Translations\Models\TranslationTranslation as Base;
 

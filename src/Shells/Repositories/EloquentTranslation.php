@@ -1,6 +1,6 @@
 <?php
 
-namespace TypiCMS\Modules\Translations\Custom\Repositories;
+namespace TypiCMS\Modules\Translations\Shells\Repositories;
 
 use TypiCMS\Modules\Translations\Repositories\EloquentTranslation as Base;
 

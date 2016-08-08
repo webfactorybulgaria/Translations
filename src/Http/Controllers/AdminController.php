@@ -2,14 +2,14 @@
 
 namespace TypiCMS\Modules\Translations\Http\Controllers;
 
-use TypiCMS\Modules\Core\Custom\Http\Controllers\BaseAdminController;
-use TypiCMS\Modules\Translations\Custom\Http\Requests\FormRequest;
+use TypiCMS\Modules\Core\Shells\Http\Controllers\BaseAdminController;
+use TypiCMS\Modules\Translations\Shells\Http\Requests\FormRequest;
 use Illuminate\Http\Request;
-use TypiCMS\Modules\Translations\Custom\Models\Translation;
-use TypiCMS\Modules\Translations\Custom\Repositories\TranslationInterface;
+use TypiCMS\Modules\Translations\Shells\Models\Translation;
+use TypiCMS\Modules\Translations\Shells\Repositories\TranslationInterface;
 use Illuminate\Support\Facades\Input;
 use Notification;
-use TypiCMS\Modules\Translations\Custom\Services\Translations;
+use TypiCMS\Modules\Translations\Shells\Services\Translations;
 
 class AdminController extends BaseAdminController
 {
@@ -45,7 +45,7 @@ class AdminController extends BaseAdminController
     /**
      * Edit form for the specified resource.
      *
-     * @param \TypiCMS\Modules\Translations\Custom\Models\Translation $translation
+     * @param \TypiCMS\Modules\Translations\Shells\Models\Translation $translation
      *
      * @return \Illuminate\View\View
      */
@@ -72,7 +72,7 @@ class AdminController extends BaseAdminController
     /**
      * Store all newly created resources in storage.
      *
-     * @param \TypiCMS\Modules\Translations\Custom\Http\Requests\Request $request
+     * @param \TypiCMS\Modules\Translations\Shells\Http\Requests\Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -88,7 +88,7 @@ class AdminController extends BaseAdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param \TypiCMS\Modules\Translations\Custom\Http\Requests\FormRequest $request
+     * @param \TypiCMS\Modules\Translations\Shells\Http\Requests\FormRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -102,8 +102,8 @@ class AdminController extends BaseAdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param \TypiCMS\Modules\Translations\Custom\Models\Translation        $translation
-     * @param \TypiCMS\Modules\Translations\Custom\Http\Requests\FormRequest $request
+     * @param \TypiCMS\Modules\Translations\Shells\Models\Translation        $translation
+     * @param \TypiCMS\Modules\Translations\Shells\Http\Requests\FormRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */

@@ -4,9 +4,9 @@ namespace TypiCMS\Modules\Translations\Repositories;
 
 use DB;
 use Illuminate\Database\Eloquent\Model;
-use TypiCMS\Modules\Core\Custom\Repositories\RepositoriesAbstract;
-use TypiCMS\Modules\Translations\Custom\Models\Translation;
-use TypiCMS\Modules\Translations\Custom\Models\TranslationTranslation;
+use TypiCMS\Modules\Core\Shells\Repositories\RepositoriesAbstract;
+use TypiCMS\Modules\Translations\Shells\Models\Translation;
+use TypiCMS\Modules\Translations\Shells\Models\TranslationTranslation;
 
 class EloquentTranslation extends RepositoriesAbstract implements TranslationInterface
 {

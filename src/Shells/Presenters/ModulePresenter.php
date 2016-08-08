@@ -1,6 +1,6 @@
 <?php
 
-namespace TypiCMS\Modules\Translations\Custom\Presenters;
+namespace TypiCMS\Modules\Translations\Shells\Presenters;
 
 use TypiCMS\Modules\Translations\Presenters\ModulePresenter as Base;
 
