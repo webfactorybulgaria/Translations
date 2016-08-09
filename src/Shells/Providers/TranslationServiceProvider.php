@@ -2,9 +2,9 @@
 
 namespace TypiCMS\Modules\Translations\Shells\Providers;
 
-use TypiCMS\Modules\Translations\Providers\TranslationServiceProvider as Base;
+use TypiCMS\Modules\Translations\Providers\TranslationServiceProvider as BaseClass;
 
-class TranslationServiceProvider extends Base
+class TranslationServiceProvider extends BaseClass
 {
 
 }

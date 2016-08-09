@@ -2,9 +2,9 @@
 
 namespace TypiCMS\Modules\Translations\Shells\Repositories;
 
-use TypiCMS\Modules\Translations\Repositories\EloquentTranslation as Base;
+use TypiCMS\Modules\Translations\Repositories\EloquentTranslation as BaseClass;
 
-class EloquentTranslation extends Base implements TranslationInterface
+class EloquentTranslation extends BaseClass implements TranslationInterface
 {
 
 }

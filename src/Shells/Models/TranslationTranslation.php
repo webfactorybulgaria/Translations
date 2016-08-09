@@ -2,9 +2,9 @@
 
 namespace TypiCMS\Modules\Translations\Shells\Models;
 
-use TypiCMS\Modules\Translations\Models\TranslationTranslation as Base;
+use TypiCMS\Modules\Translations\Models\TranslationTranslation as BaseClass;
 
-class TranslationTranslation extends Base
+class TranslationTranslation extends BaseClass
 {
 
 }
