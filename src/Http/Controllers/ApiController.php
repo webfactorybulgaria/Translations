@@ -3,9 +3,9 @@
 namespace TypiCMS\Modules\Translations\Http\Controllers;
 
 use Illuminate\Support\Facades\Request;
-use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
-use TypiCMS\Modules\Translations\Models\Translation;
-use TypiCMS\Modules\Translations\Repositories\TranslationInterface as Repository;
+use TypiCMS\Modules\Core\Shells\Http\Controllers\BaseApiController;
+use TypiCMS\Modules\Translations\Shells\Models\Translation;
+use TypiCMS\Modules\Translations\Shells\Repositories\TranslationInterface as Repository;
 
 class ApiController extends BaseApiController
 {
@@ -49,7 +49,7 @@ class ApiController extends BaseApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param \TypiCMS\Modules\Translations\Models\Translation $translation
+     * @param \TypiCMS\Modules\Translations\Shells\Models\Translation $translation
      *
      * @return \Illuminate\Http\JsonResponse
      */

@@ -16,7 +16,7 @@ class MixedLoader implements LoaderInterface
     /**
      *    Repository.
      *
-     *    @var \TypiCMS\Modules\Translations\Repositories\TranslationInterface
+     *    @var \TypiCMS\Modules\Translations\Shells\Repositories\TranslationInterface
      */
     protected $repository;
 
@@ -24,7 +24,7 @@ class MixedLoader implements LoaderInterface
      *     Create a new mixed loader instance.
      *
      *    @param     \Illuminate\Translation\FileLoader $fileLoader
-     *    @param     \TypiCMS\Modules\Translations\Repositories\TranslationInterface $repository
+     *    @param     \TypiCMS\Modules\Translations\Shells\Repositories\TranslationInterface $repository
      */
     public function __construct($fileLoader, $repository)
     {
