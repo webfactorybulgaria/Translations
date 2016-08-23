@@ -6,4 +6,5 @@ return [
     'New'          => 'New translation',
     'Edit'         => 'Edit translation',
     'Back'         => 'Back to translations',
+    'Cancel'       => 'Cancel',
 ];

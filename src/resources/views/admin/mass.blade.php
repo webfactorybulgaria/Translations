@@ -20,7 +20,8 @@
 </textarea>
 	<div class="btn-toolbar">
 	    <button class="btn-primary btn" value="true" id="exit" name="exit" type="submit">@lang('validation.attributes.save and exit')</button>
-	    <button class="btn-default btn" type="submit">@lang('validation.attributes.save')</button>
+        <button class="btn-default btn" type="submit">@lang('validation.attributes.save')</button>
+        <a href="{{route('admin::index-translations')}}" class="btn-default btn" >@lang('translations::global.Cancel')</a>
 	</div>
 {!! BootForm::close() !!}
 
