@@ -2,8 +2,8 @@
 
 namespace TypiCMS\Modules\Translations\Providers;
 
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
+use TypiCMS\Modules\Core\Shells\Providers\BaseRouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -31,7 +31,7 @@ class RouteServiceProvider extends ServiceProvider
              */
             $router->get('admin/translations', 'AdminController@index')->name('admin::index-translations');
             $router->get('admin/translations/create', 'AdminController@create')->name('admin::create-translation');
-            
+
             $router->get('admin/translations/mass', 'AdminController@massEdit')->name('admin::translations-massEdit');
             $router->post('admin/translations/mass', 'AdminController@massStore')->name('admin::translations-massStore');
 
